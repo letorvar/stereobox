@@ -7,25 +7,26 @@ var canvasWidth = 2000 + margin;
 var canvasHeight = canvasWidth / 2;
 var amountOfColors = 2;
 var randColor;
-var rRange = 10;
-var gRange = 10;
+var rRange = 255;
+var gRange = 255;
 var bRange = 255;
 var numberOfColors = 3;
 var availableColors;
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
-    // availableColors = drawColors(numberOfColors);
-    availableColors = [
-        { r: 230, g: 5, b: 2 },
-        { r: 8, g: 240, b: 6 },
-        { r: 3, g: 10, b: 220 }
-    ];
+    availableColors = drawColors(numberOfColors);
+    // availableColors = [
+    //     { r: 230, g: 5, b: 2 },
+    //     { r: 8, g: 240, b: 6 },
+    //     { r: 3, g: 10, b: 220 }
+    // ];
     noLoop();
 }
 
 function draw() {
     var index = 0;
+    var randomCoordinates = drawCoordinate();
     for (var x = 0; x < amountOfRectsInRow; x++) {
         for (var y = 0; y < amountOfRectsInRow; y++) {
             // randColor = drawColor(rRange, gRange, bRange);
@@ -34,16 +35,14 @@ function draw() {
 
             fill(randColor.r, randColor.g, randColor.b);
             rect(x * rectSize, y * rectSize, rectSize, rectSize);
+            if (randomCoordinates.x === x && randomCoordinates.y === y) {
+                index++;
+                randColor = availableColors[index % numberOfColors];
+                fill(randColor.r, randColor.g, randColor.b);
+            }
             rect(x * rectSize + boardSize + margin, y * rectSize, rectSize, rectSize);
         }
     }
-    randomCoordinates = drawCoordinate();
-    index = floor(random(numberOfColors));
-    randColor = availableColors[index]; //FIXME: poprawić losowany kolor żeby nie pokrywał się z aktualnym
-    fill(randColor.r, randColor.g, randColor.b);
-    rect(randomCoordinates.x * rectSize, randomCoordinates.y * rectSize, rectSize, rectSize); //2 pierwsze parametry funkcji to współrzędne a dwa pozostałe to rysowana wielkość  
-
-
 }
 
 function drawCoordinate() {
