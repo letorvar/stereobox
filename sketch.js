@@ -15,46 +15,46 @@ var availableColors;
 
 var rects = [];
 var twinRects = [];
-function RandomColor(){
+function RandomColor() {
     var indexOfColor = floor(random(numberOfColors));
     var randColor = availableColors[indexOfColor];
     this.r = randColor.r;
     this.g = randColor.g;
     this.b = randColor.b;
 }
-function ColorfulRect(x,y,color){
-    this.x = x;
-    this.y = y;
-    this.color = color; 
 
-    this.drawYourself = function(offsetX, offsetY){
-        fill(this.color.r, this.color.g, this.color.b);
-        rect(this.x * rectSize + offsetX, this.y * rectSize + offsetY, rectSize, rectSize);    
+
+function mousePressed() {
+    for (var i = 0; i < rects.length; i++) {
+        rects[i].clicked();
+
+        // twinRects[i])
     }
 }
+
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     availableColors = drawColors(numberOfColors);
     for (var x = 0; x < amountOfRectsInRow; x++) {
         for (var y = 0; y < amountOfRectsInRow; y++) {
             let rectColor = new RandomColor();
-            rects.push(new ColorfulRect(x,y,rectColor));
-            twinRects.push(new ColorfulRect(x,y,rectColor));
+            rects.push(new ColorfulRect(x, y, rectColor));
+            twinRects.push(new ColorfulRect(x, y, rectColor));
         }
     }
-    
+
     // availableColors = [
     //     { r: 230, g: 5, b: 2 },
     //     { r: 8, g: 240, b: 6 },
     //     { r: 3, g: 10, b: 220 }
     // ];
-    noLoop();
+    // noLoop();
 }
 
 function draw() {
-    for (var i = 0; i < rects.length; i++){
-        rects[i].drawYourself(0,0);
-        twinRects[i].drawYourself(boardSize + margin,0);
+    for (var i = 0; i < rects.length; i++) {
+        rects[i].drawYourself(0, 0);
+        twinRects[i].drawYourself(boardSize + margin, 0);
     }
 }
 
