@@ -23,10 +23,16 @@ function RandomColor() {
     this.b = randColor.b;
 }
 
+function mouseMoved() {
+    for(var i = 0; i < rects.length; i++){
+        rects[i].mouseOver(mouseX, mouseY);
+    }
+}
 
 function mousePressed() {
+    // alert(' '+ mouseX + ' ' + mouseY);
     for (var i = 0; i < rects.length; i++) {
-        rects[i].clicked();
+        rects[i].clicked(mouseX, mouseY);
 
         // twinRects[i])
     }
