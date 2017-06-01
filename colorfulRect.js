@@ -4,7 +4,16 @@ function ColorfulRect(x, y, color) {
     this.color = color;
 
     this.drawYourself = function (offsetX, offsetY) {
-        fill(this.color.r, this.color.g, this.color.b);
+        if (mouseX >= this.x * rectSize && mouseX < this.x * rectSize + rectSize &&
+            mouseY >= this.y * rectSize && mouseY <this.y * rectSize + rectSize
+        ){ 
+           fill(this.color.r, this.color.g, this.color.b);
+           strokeWeight(10);
+           stroke(0);
+        } else{
+            fill(this.color.r, this.color.g, this.color.b);
+            strokeWeight(1);
+        }
         rect(this.x * rectSize + offsetX, this.y * rectSize + offsetY, rectSize, rectSize);
     }
     this.clicked = function (mouseX, mouseY) {
